@@ -13,5 +13,5 @@ You can view information about the beer such as:
 - Pricing for each size denomination of cans or bottles.
 
 ## Data Sources:
-Information obtained from http://ontariobeerapi.ca
-Beer icon made by Freepik from www.flaticon.com
+- Information obtained from http://ontariobeerapi.ca
+- Beer icon made by Freepik from www.flaticon.com
