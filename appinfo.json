@@ -1,13 +1,10 @@
 {
-  "uuid": "133215f0-cf20-4c05-997b-3c9be5a64e5b",
-  "shortName": "Pebble.js",
-  "longName": "Pebble.js",
-  "companyName": "Meiguro",
+  "uuid": "2a245a6e-490c-47d0-8e45-38a09862ffbf",
+  "shortName": "Beer Finder",
+  "longName": "Ontario Beer On Sale",
+  "companyName": "Drewlusions",
   "versionCode": 1,
-  "versionLabel": "0.4",
-  "capabilities": [
-    "configurable"
-  ],
+  "versionLabel": "0.0",
   "watchapp": {
     "watchface": false
   },
@@ -29,6 +26,11 @@
         "type": "png",
         "name": "IMAGE_TILE_SPLASH",
         "file": "images/tile_splash.png"
+      },
+      {
+        "type": "png",
+        "name": "IMAGE_LOADING",
+        "file": "images/loading.png"
       },
       {
         "type": "font",
