@@ -1,4 +1,11 @@
+/*
+Pebble Beer Finder
+Copyright 2015 Andrew Warkentin
 
+This Pebble app displays which beer is on sale at Ontatrio Beer Stores
+Information obtained from http://ontariobeerapi.ca
+Beer icon made by Freepik from www.flaticon.com
+*/
 
 var UI = require('ui');
 var Vector2 = require('vector2');
@@ -11,27 +18,27 @@ var loadingWindow = new UI.Window({
 
 var background = new UI.Rect({
 	position: new Vector2(0, 0),
-	size: new Vector2(144, 166),
+	size: new Vector2(144, 166), 
 	backgroundColor: 'white'
 });
-var textfield = new UI.Text({
-	position: new Vector2(0, 0),
+var textfield = new UI.Text({ 
+	position: new Vector2(0, 0), 
 	size: new Vector2(144, 20),
 	font: 'gothic-24-bold',
-	text: 'Loading...',
-	textAlign: 'center',
+	text: 'Loading...', 
+	textAlign: 'center', 
   color: 'black'
 });
 var loadingImage = new UI.Image({
 	position: new Vector2(8, 35),
 	size: new Vector2(128, 128),
-	backgroundColor: 'clear',
+	backgroundColor: 'clear', 
 	image: 'images/loading.png'
 });
 
 loadingWindow.add(background);
 loadingWindow.add(textfield);
-loadingWindow.add(loadingImage);
+loadingWindow.add(loadingImage); 
 loadingWindow.show();
 
 // Perform a GET requsest to the Ontario beer API.
@@ -120,33 +127,35 @@ var showMoreInfo = function(beerList, index) {
 			// Generate the pricing table:
 			var priceTable = [];
 			data.forEach(function(product, index) {
-				// Parse the string to make the text simpler for displaying on a small screen.
 				var productSize = product.size;
-				if(productSize.search("Can") > 0) {
-					productSize = "ITS A CAN";
-				}
-				// productSize = productSize.toString();
-				// console.log(product.size);
-				// console.log("60  ×  Can 355 ml");
-				// productSize = "60  ×  Can 355 ml";
-				// productSize = productSize.replace(/Bottle 341 ml/g, "Bottles");
-				// productSize = productSize.replace(/Can 355 ml/g, "Cans");
-				// productSize = productSize.replace(/Can 473 ml/g, "Bottles");
+				var numberOfProducts = productSize.slice(0,2); // Get the number of items
 
-				// var newString = '24  ×  Bottle 341 ml';
-    		// newString = newString.replace(/Bottle 341 ml/g, "Bottles");
+				// Parse the string to make the text simpler for displaying on a small screen.
+				if(productSize.search("355") > 0) {
+					productSize = " Cans";
+				} else if(productSize.search("341") > 0) {
+					productSize = " Bottles";
+				} else if(productSize.search("473") > 0) {
+					productSize = " Tall Boys";
+				} else if(productSize.search("Keg") > 0) {
+					productSize = " Keg";
+				}
+
+				// Special case for price of 1 tall boy
+				if(numberOfProducts.search("1 ") > 0) { 
+					productSize = "Tall Boy"; 
+				}
 
 				// generate an array of price information
 				priceTable[index] = new UI.Text({
 					position: new Vector2(5, 60 + index * 15),
 					size: new Vector2(144, 15),
 					font: 'gothic-14',
-					text: "$" + product.price + " for " + productSize,
+					text: "$" + product.price + " for " + numberOfProducts + productSize,
 					textOverflow: 'fill',
 					textAlign: 'left'
 				})
-
-			})
+			});
 
 			moreInfo.add(title);
 			moreInfo.add(percentAlc);
@@ -155,7 +164,6 @@ var showMoreInfo = function(beerList, index) {
 				moreInfo.add(priceInfo);
 			})
 			moreInfo.show();
-
 		},
 		function(error, status, request) {
 			showErrorMessage("Information Unavailable.");
@@ -163,6 +171,7 @@ var showMoreInfo = function(beerList, index) {
 	);
 }
 
+// Shows input error message in a card
 var showErrorMessage = function(message) {
 	var errorMessage = new UI.Window({
 		fullscreen: true,
