@@ -139,6 +139,16 @@ var showMoreInfo = function(beerList, index) {
 					productSize = " Tall Boys";
 				} else if(productSize.search("Keg") > 0) {
 					productSize = " Keg";
+				} else if(productSize.search("740") > 0) {
+					productSize = " 740ml Cans";
+				} else if(productSize.search("710") > 0) {
+					productSize = " 710ml Cans";
+				} else if(productSize.search("296") > 0) {
+					productSize = " 296ml Cans";
+				} else if(productSize.search("330") > 0) {
+					productSize = " 330ml Cans";
+				} else {
+					productSize = " Custom Sized Containers";
 				}
 
 				// Special case for price of 1 tall boy
